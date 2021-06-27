@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*SignUp Component*/
+.SignUp__password-not-match {
+  text-align: left;
+  color: red;
+}
+/*End of SignUp Component*/

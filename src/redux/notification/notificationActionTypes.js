@@ -1,0 +1,1 @@
+export const CLOSE_MODAL_WINDOW = 'CLOSE_MODAL_WINDOW';
