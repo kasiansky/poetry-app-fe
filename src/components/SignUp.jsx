@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { signup } from '../redux/auth/signupAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -55,14 +56,27 @@ const SignUp = () => {
     password: '',
   });
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [isPasswordMatch, setIsPasswordMatch] = useState(true);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.auth.currentUser);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (currentUser) {
+      history.push('/');
+    }
+  }, [currentUser]);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (user.password === repeatPassword) {
       dispatch(signup(user));
-    } else alert('passwords not match');
+    }
+  };
+  const handleOnChange = e => {
+    setRepeatPassword(e.target.value);
+    setIsPasswordMatch(user.password === e.target.value);
   };
 
   return (
@@ -116,7 +130,7 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange={e => setRepeatPassword(e.target.value)}
+                onChange={handleOnChange}
                 variant='outlined'
                 required
                 fullWidth
@@ -126,6 +140,11 @@ const SignUp = () => {
                 id='reapeatPassword'
                 autoComplete='current-password'
               />
+              {!isPasswordMatch && (
+                <div className='SignUp__password-not-match'>
+                  Passwords not match
+                </div>
+              )}
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel

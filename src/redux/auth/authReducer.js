@@ -1,14 +1,20 @@
-import { SIGNUP_SUCCESS, SIGNUP_FAILURE } from './actionTypes';
+import {
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
+  LOGIN_SUCCESS,
+  LOG_OUT,
+} from './actionTypes';
 
 const initState = {
-  currentUser: '',
+  currentUser: null,
   error: '',
 };
 
 const authReducer = (state = initState, action) => {
   switch (action.type) {
+    case LOGIN_SUCCESS:
     case SIGNUP_SUCCESS:
-      localStorage.setItem(JSON.stringify(action.payload));
+      localStorage.setItem('currentUser', JSON.stringify(action.payload));
       return {
         ...state,
         currentUser: action.payload,
@@ -18,6 +24,13 @@ const authReducer = (state = initState, action) => {
         ...state,
         error: action.payload,
       };
+    case LOG_OUT:
+      localStorage.removeItem('currentUser');
+      return {
+        ...state,
+        currentUser: null,
+      };
+
     default:
       return state;
   }
