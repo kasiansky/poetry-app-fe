@@ -73,6 +73,16 @@ const Navbar = () => {
                 <Box mr={3}>
                   <Button
                     component={Link}
+                    to='/post-poem'
+                    color='secondary'
+                    variant='contained'
+                  >
+                    New Poem
+                  </Button>
+                </Box>
+                <Box mr={3}>
+                  <Button
+                    component={Link}
                     to='/'
                     color='secondary'
                     variant='contained'

@@ -6,6 +6,7 @@ import {
   RECOVER_PASSWORD_SUCCESS,
   RECOVER_PASSWORD_FAILURE,
 } from '../auth/actionTypes';
+import { POST_POEM_FAILURE } from '../poem/poemActionTypes';
 import { CLOSE_MODAL_WINDOW } from './notificationActionTypes';
 
 const initState = {
@@ -45,6 +46,11 @@ const notificationReducer = (state = initState, action) => {
         isOpen: true,
       };
     case RECOVER_PASSWORD_FAILURE:
+      return {
+        text: action?.payload?.response?.data?.message,
+        isOpen: true,
+      };
+    case POST_POEM_FAILURE:
       return {
         text: action?.payload?.response?.data?.message,
         isOpen: true,

@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess } from './redux/auth/signupAction';
 import Notification from './components/Notification';
 import RecoverPassword from './components/RecoverPassword';
+import PoemPage from './components/PoemPage';
+import PostPoem from './components/PostPoem';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +28,8 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/forgot-password' component={ForgotPassword} />
           <Route path='/recover-password/:token' component={RecoverPassword} />
+          <Route path='/post-poem' component={PostPoem} />
+          <Route path='/poem-page' component={PoemPage} />
         </Switch>
         <Notification />
       </div>

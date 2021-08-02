@@ -3,6 +3,7 @@ export const endpoints = {
   login: 'login',
   forgotPassword: 'api/auth/forgotPassword',
   recoverPassword: 'api/auth/recoverPassword',
+  postPoem: 'api/poems',
 };
 const baseUrl = 'http://localhost:4000/';
 export const getEndpointName = endpoint => {
